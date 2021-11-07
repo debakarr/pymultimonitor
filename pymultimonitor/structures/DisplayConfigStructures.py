@@ -12,6 +12,7 @@ from ctypes.wintypes import (
 
 
 class DISPLAYCONFIG_RATIONAL(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_rational"""
     _fields_ = [
         ("Numerator", UINT),
         ("Denominator", UINT),
@@ -19,6 +20,7 @@ class DISPLAYCONFIG_RATIONAL(ctypes.Structure):
 
 
 class LUID(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-luid"""
     _fields_ = [
         ("LowPart", DWORD),
         ("HighPart", LONG),
@@ -26,6 +28,7 @@ class LUID(ctypes.Structure):
 
 
 class DISPLAYCONFIG_PATH_SOURCE_INFO(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_path_source_info"""
     _fields_ = [
         ("adapterId", LUID),
         ("id", UINT),
@@ -35,6 +38,7 @@ class DISPLAYCONFIG_PATH_SOURCE_INFO(ctypes.Structure):
 
 
 class DISPLAYCONFIG_PATH_TARGET_INFO(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_path_target_info"""
     _fields_ = [
         ("adapterId", LUID),
         ("id", UINT),
@@ -50,6 +54,7 @@ class DISPLAYCONFIG_PATH_TARGET_INFO(ctypes.Structure):
 
 
 class DISPLAYCONFIG_PATH_INFO(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_path_info"""
     _fields_ = [
         ("sourceInfo", DISPLAYCONFIG_PATH_SOURCE_INFO),
         ("targetInfo", DISPLAYCONFIG_PATH_TARGET_INFO),
@@ -58,6 +63,7 @@ class DISPLAYCONFIG_PATH_INFO(ctypes.Structure):
 
 
 class DISPLAYCONFIG_2DREGION(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_2dregion"""
     _fields_ = [
         ("cx", UINT),
         ("cz", UINT),
@@ -65,6 +71,7 @@ class DISPLAYCONFIG_2DREGION(ctypes.Structure):
 
 
 class DISPLAYCONFIG_VIDEO_SIGNAL_INFO(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_video_signal_info"""
     _fields_ = [
         ("pixelRate", LARGE_INTEGER),
         ("hSyncFreq", DISPLAYCONFIG_RATIONAL),
@@ -77,6 +84,7 @@ class DISPLAYCONFIG_VIDEO_SIGNAL_INFO(ctypes.Structure):
 
 
 class DISPLAYCONFIG_SOURCE_MODE(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_source_mode"""
     _fields_ = [
         ("width", UINT),
         ("height", UINT),
@@ -94,6 +102,7 @@ class DISPLAYCONFIG_MODE_INFO_DUMMYUNIONNAME(ctypes.Union):
 
 
 class DISPLAYCONFIG_MODE_INFO(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_mode_info"""
     _fields_ = [
         ("infoType", UINT),
         ("id", UINT),
@@ -103,6 +112,7 @@ class DISPLAYCONFIG_MODE_INFO(ctypes.Structure):
 
 
 class DISPLAYCONFIG_DEVICE_INFO_HEADER(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_device_info_header"""
     _fields_ = [
         ("type", UINT),
         ("size", UINT),
@@ -112,6 +122,7 @@ class DISPLAYCONFIG_DEVICE_INFO_HEADER(ctypes.Structure):
 
 
 class DISPLAYCONFIG_SOURCE_DEVICE_NAME(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_source_device_name"""
     _fields_ = [
         ("header", DISPLAYCONFIG_DEVICE_INFO_HEADER),
         ("viewGdiDeviceName", WCHAR * 32),
@@ -119,6 +130,7 @@ class DISPLAYCONFIG_SOURCE_DEVICE_NAME(ctypes.Structure):
 
 
 class DISPLAYCONFIG_TARGET_DEVICE_NAME(ctypes.Structure):
+    """https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-displayconfig_target_device_name"""
     _fields_ = [
         ("header", DISPLAYCONFIG_DEVICE_INFO_HEADER),
         ("flags", UINT),
