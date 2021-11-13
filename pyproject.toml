@@ -3,6 +3,10 @@ name = "pymultimonitor"
 version = "0.1.0"
 description = ""
 authors = ["debakarr <debakar.roy@intel.com>"]
+readme = "README.md"
+homepage = "https://github.com/Dibakarroy1997/pymultimonitor"
+repository = "https://github.com/Dibakarroy1997/pymultimonitor"
+keywords = ["display", "windows"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
