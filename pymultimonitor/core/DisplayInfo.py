@@ -2,12 +2,14 @@ import ctypes
 from ctypes.wintypes import DWORD, UINT
 from typing import Tuple, Dict
 
-from pymultimonitor.constants.DisplayConfigDeviceInfo import DisplayConfigDeviceInfo
-from pymultimonitor.constants.DisplayConfigTopology import DisplayConfigTopology
-from pymultimonitor.constants.DisplayModeInfo import DisplayModeInfo
-from pymultimonitor.constants.QueryDisplayConfigFlag import QueryDisplayConfigFlag
-from pymultimonitor.constants.SetDisplayConfigFlag import SetDisplayConfigFlag
-from pymultimonitor.structures.DisplayConfigStructures import (
+from pymultimonitor.cinterface.constants.DisplayConfigDeviceInfo import (
+    DisplayConfigDeviceInfo,
+)
+from pymultimonitor.cinterface.constants.DisplayModeInfo import DisplayModeInfo
+from pymultimonitor.cinterface.constants.QueryDisplayConfigFlag import (
+    QueryDisplayConfigFlag,
+)
+from pymultimonitor.cinterface.structures.displaydevicesreference.wingdi.DisplayConfigStructures import (
     DISPLAYCONFIG_PATH_INFO,
     DISPLAYCONFIG_MODE_INFO,
     DISPLAYCONFIG_SOURCE_DEVICE_NAME,
@@ -16,7 +18,7 @@ from pymultimonitor.structures.DisplayConfigStructures import (
 )
 
 
-class PyMultiMonitor:
+class DisplayInfo:
     @classmethod
     def _get_display_info(cls) -> Tuple[ctypes.Array, ctypes.Array, ctypes.c_uint]:
         count_path_elements = DWORD()
@@ -46,43 +48,6 @@ class PyMultiMonitor:
             raise Exception(f"QueryDisplayConfig failed with {error_code=}")
 
         return display_paths, display_modes, current_topology_id
-
-    @classmethod
-    def _set_display_topology(cls, topology: SetDisplayConfigFlag) -> None:
-        error_code = ctypes.windll.user32.SetDisplayConfig(
-            0,
-            None,
-            0,
-            None,
-            topology.value | SetDisplayConfigFlag.SDC_APPLY.value,
-        )
-        if error_code != 0:
-            raise Exception(f"SetDisplayConfig failed with {error_code=}")
-
-    def get_display_topology(self) -> DisplayConfigTopology:
-        """
-        Get the current display topology (INTERNAL, EXTERNAL, EXTENDED, CLONE)
-
-        :return: :class:`DisplayConfigTopology` object
-        """
-        _, _, topology_id = self._get_display_info()
-        return DisplayConfigTopology(topology_id.value)
-
-    def set_topology_extend(self) -> None:
-        """Set display to extended mode"""
-        self._set_display_topology(SetDisplayConfigFlag.SDC_TOPOLOGY_EXTEND)
-
-    def set_topology_clone(self) -> None:
-        """Set display to clone mode"""
-        self._set_display_topology(SetDisplayConfigFlag.SDC_TOPOLOGY_CLONE)
-
-    def set_topology_internal(self) -> None:
-        """Set display to internal mode"""
-        self._set_display_topology(SetDisplayConfigFlag.SDC_TOPOLOGY_INTERNAL)
-
-    def set_topology_external(self) -> None:
-        """Set display to external mode"""
-        self._set_display_topology(SetDisplayConfigFlag.SDC_TOPOLOGY_EXTERNAL)
 
     @classmethod
     def _get_display_device_info(
